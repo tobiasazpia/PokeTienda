@@ -1,0 +1,26 @@
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: 1px solid black;
+    background-color: aliceblue;
+    font-family: "Josefin Sans", sans-serif;
+}
+
+li{
+    display: inline-block;
+    margin: 1rem;
+    cursor: pointer;
+    font-family: "Josefin Sans", sans-serif;
+}
+
+.pri{
+    color: rgb(165, 19, 19);
+}
+
+.seg{
+    color: rgb(155, 107, 17);
+}
+.ter{
+    color: rgb(123, 123, 29);
+}
