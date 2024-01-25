@@ -8,7 +8,7 @@ const App = () => {
   return (
     <>
       <NavBar/>
-      <ItemListContainer greeting="Primera entrega!"/>
+      <ItemListContainer greeting="Segunda entrega!"/>
       <ItemCount initial={1} stock={10} onAdd={(quantity) => console.log("Cantidad agreagada ", quantity)}/>
     </>
   )
