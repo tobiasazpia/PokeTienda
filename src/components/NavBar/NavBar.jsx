@@ -12,9 +12,9 @@ const NavBar = () => {
             <div className='Categories'>
                 <NavLink to={`/category/primera`} className='prim'>Primera Genereción</NavLink>
                 <NavLink to={`/category/segunda`} className='seg'>Segunda Genereción</NavLink>
-                <NavLink to={`/category/tercera`} className='ter'>Tercera Genereción</NavLink>        
+                <NavLink to={`/category/tercera`} className='ter'>Tercera Genereción</NavLink>
             </div>
-            <CartWidget/>
+            <CartWidget />
         </header>
 
     )
