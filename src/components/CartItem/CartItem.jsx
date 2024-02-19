@@ -1,8 +1,12 @@
 import React from 'react'
 
-const CartItem = () => {
+const CartItem = ({item,quantity}) => {
   return (
-    <div>CartItem</div>
+    <div>
+        <h3>{item.name}</h3>
+        <p> Cantidad: {quantity}</p>
+        <p> Precio: {item.price}</p>
+    </div>
   )
 }
 
