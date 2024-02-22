@@ -10,9 +10,9 @@ const NavBar = () => {
                 <h1>PokeTienda</h1>
             </Link>
             <div className='Categories'>
-                <NavLink to={`/category/primera`} className='prim'>Primera Genereción</NavLink>
-                <NavLink to={`/category/segunda`} className='seg'>Segunda Genereción</NavLink>
-                <NavLink to={`/category/tercera`} className='ter'>Tercera Genereción</NavLink>
+                <NavLink to={`/gen/1`} className='prim'>Primera Genereción</NavLink>
+                <NavLink to={`/gen/2`} className='seg'>Segunda Genereción</NavLink>
+                <NavLink to={`/gen/3`} className='ter'>Tercera Genereción</NavLink>
             </div>
             <CartWidget />
         </header>

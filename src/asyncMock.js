@@ -3,7 +3,7 @@ const products = [
         id: 1,
         name: 'Pika Prim',
         price: 1000,
-        category: 'primera',
+        category: 1,
         img: 'https://i.pinimg.com/736x/f3/e1/b8/f3e1b8019f160f88531d8af792716b4f.jpg',
         stock: 25,
         description: 'la desc del test'
@@ -12,7 +12,7 @@ const products = [
         id: 2,
         name: 'Pika Seg 1',
         price: 4000,
-        category: 'segunda',
+        category: 2,
         img: 'https://i.pinimg.com/736x/f3/e1/b8/f3e1b8019f160f88531d8af792716b4f.jpg',
         stock: 25,
         description: 'la desc del test'

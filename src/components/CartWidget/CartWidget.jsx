@@ -6,8 +6,6 @@ import "./CartWidget.css"
 const CartWidget = () => {
   
   const {totalQuantity} = useContext(CartContext)
-  console.log("cart widg");
-  console.log("cart widg",totalQuantity);
 
   return (
     <div>
