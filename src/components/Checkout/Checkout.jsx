@@ -46,6 +46,7 @@ const Checkout = () => {
 
         addDoc(collection(db, "orders"), orden)
             .then(docRef => {
+                console.log ("adding doc",docRef.id)
                 setOrdenId(docRef.id)
                 clearCart();
                 setNombre("");
@@ -65,7 +66,7 @@ const Checkout = () => {
             <div>
                 <h2>Checkout - Finalizamos la compra</h2>
 
-                <form>
+                <form onSubmit={manejadorSubmit}>
                     {
                         cart.map(prod => (
                             <div key={prod.item.id}>
@@ -74,9 +75,8 @@ const Checkout = () => {
                                 <hr />
                             </div>
                         )
-                        )
-                    }
-                </form>
+                        )   
+                    }               
 
                 <div className="mb-3">
                     <label htmlFor="nombre" className="form-label">Nombre</label>
@@ -104,14 +104,21 @@ const Checkout = () => {
 
                 {error && <p style={{ color: "black" }}> {error} </p>}
 
-                <div className="mb-3">
-                    <button className="btn btn-primary" disabled={cart.length === 0}>Finalizar Orden</button>
+               
+                    <button>Finalizar Orden</button>
+
                     <button type="reset" className="btn btn-warning" style={{ margin: "20px", backgroundColor: "black", color: "white" }}>Borrar</button>
-                </div>
+
 
                 {
                     ordenId && <strong>¡Gracias por su compra! Tu número de orden es: {ordenId}</strong>
                 }
+
+                {
+                    
+                    true && <strong>trueeee</strong>
+                }
+                </form>
 
             </div>
         )
