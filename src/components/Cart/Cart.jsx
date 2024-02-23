@@ -17,6 +17,7 @@ const Cart = () => {
     }
   return (
     <>
+        {console.log(total)}
         {cart.map (prod =><CartItem key={prod.item.id} {...prod} />)}   
         <h3>Total: ${total}</h3>
         <button onClick={() => clearCart()} className='Button'>Limpiar carrito</button>

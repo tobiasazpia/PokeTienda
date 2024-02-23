@@ -24,7 +24,7 @@ export const CartProvider = ({ children }) => {
             })
             setCart (CartUpdated);
         }
-        setTotal(prev => prev + item.price * quantity)
+        setTotal(prev => prev + item.precio * quantity)
         setTotalQuantity(prev => prev + quantity)
     }
 

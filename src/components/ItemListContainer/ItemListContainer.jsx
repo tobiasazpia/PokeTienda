@@ -13,13 +13,11 @@ const ItemListContainer = ({ greeting }) => {
   const { categoryId } = useParams()
 
   useEffect(() => {
-    console.log ('catid ', categoryId)
     const collectionRef = categoryId
     ?
       query(collection(db, 'pokes'), where('gen', '==', categoryId))
     :
       collection(db, 'pokes')
-      console.log ('colref ',collectionRef)
 
     getDocs(collectionRef)
       .then(response => {

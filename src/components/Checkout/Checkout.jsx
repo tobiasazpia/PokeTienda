@@ -1,13 +1,13 @@
 import { useState, useContext } from "react";
-import { CarritoContext } from "../../context/CarritoContext";
+import { CartContext } from "../../context/cartContext";
 import { db } from "../../services/config";
 import { collection, addDoc, updateDoc, getDoc,doc} from "firebase/firestore";
-import Swal from "sweetalert2";
+//import Swal from "sweetalert2";
 import "../Checkout/Checkout.css"
 
 
 const Checkout = () => {
-    const { carrito, vaciarCarrito, total } = useContext(CarritoContext);
+    const { cart, vaciarCarrito, total } = useContext(CartContext);
 
     const [nombre, setNombre] = useState("");
     const [apellido, setApellido] = useState("");
@@ -35,7 +35,7 @@ const Checkout = () => {
 
 
         const orden = {
-            items: carrito.map(libro => ({
+            items: cart.map(libro => ({
                 id: libro.item.id,
                 nombre: libro.item.nombre,
                 cantidad: libro.cantidad
@@ -96,7 +96,7 @@ const Checkout = () => {
 
             <form onSubmit={manejadorSubmit}>
                 {
-                    carrito.map(libro => (
+                    cart.map(libro => (
                         <div className="detalle" key={libro.item.id}>
                             <p> Descripción:  {libro.item.nombre} x {libro.cantidad} </p>
                             <p> Precio: $ {libro.item.precio} </p>
@@ -135,7 +135,7 @@ const Checkout = () => {
                 }
 
                 <div className="mb-3">
-                    <button className="btn btn-primary" disabled={carrito.length === 0}>Finalizar Orden</button>
+                    <button className="btn btn-primary" disabled={cart.length === 0}>Finalizar Orden</button>
                     <button type="reset" className="btn btn-warning" style={{margin: "20px", backgroundColor: "black", color: "white"}}>Borrar</button>
                 </div>
 
