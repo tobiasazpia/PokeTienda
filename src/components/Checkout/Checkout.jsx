@@ -35,10 +35,10 @@ const Checkout = () => {
 
 
         const orden = {
-            items: cart.map(libro => ({
-                id: libro.item.id,
-                nombre: libro.item.nombre,
-                cantidad: libro.cantidad
+            items: cart.map(poke => ({
+                id: poke.item.id,
+                nombre: poke.item.nombre,
+                cantidad: poke.cantidad
             })),
             total: total,
             fecha: new Date(),
@@ -48,11 +48,11 @@ const Checkout = () => {
             email
         }
             Promise.all (
-            orden.items.map( async (libroOrden)=>{
-            const libroRef = doc(db, "items", libroOrden.id)    
-            const libroDoc= await getDoc(libroRef)
-            const stockActual = libroDoc.data().stock;
-            await updateDoc (libroRef, {stock: stockActual - libroOrden.cantidad})
+            orden.items.map( async (pokeOrden)=>{
+            const pokeRef = doc(db, "items", pokeOrden.id)    
+            const pokeDoc= await getDoc(pokeRef)
+            const stockActual = pokeDoc.data().stock;
+            await updateDoc (pokeRef, {stock: stockActual - pokeOrden.cantidad})
         })
         )
         .then(()=> {
@@ -96,10 +96,10 @@ const Checkout = () => {
 
             <form onSubmit={manejadorSubmit}>
                 {
-                    cart.map(libro => (
-                        <div className="detalle" key={libro.item.id}>
-                            <p> Descripción:  {libro.item.nombre} x {libro.cantidad} </p>
-                            <p> Precio: $ {libro.item.precio} </p>
+                    cart.map(poke => (
+                        <div className="detalle" key={poke.item.id}>
+                            <p> Descripción:  {poke.item.nombre} x {poke.cantidad} </p>
+                            <p> Precio: $ {poke.item.precio} </p>
                             
                         </div>
                     ))
