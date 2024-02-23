@@ -6,6 +6,7 @@ import "../Checkout/Checkout.css"
 
 
 const Checkout = () => {
+
     const { cart, clearCart, total } = useContext(CartContext);
 
     const [nombre, setNombre] = useState("");
@@ -18,7 +19,7 @@ const Checkout = () => {
 
     const manejadorSubmit = (event) => {
         event.preventDefault();
-
+        console.log('kkkk')
         if (!nombre || !apellido || !telefono || !email || !emailConfirmacion) {
             setError("Por favor completar todos los campos");
             return;
@@ -33,7 +34,7 @@ const Checkout = () => {
             items: cart.map(prod => ({
                 id: prod.item.id,
                 nombre: prod.item.nombre,
-                cantidad: prod.cantidad
+                cantidad: prod.quantity
             })),
             total: total,
             fecha: new Date(),
@@ -42,6 +43,7 @@ const Checkout = () => {
             telefono,
             email
         }
+
         addDoc(collection(db, "orders"), orden)
             .then(docRef => {
                 setOrdenId(docRef.id)
@@ -52,9 +54,12 @@ const Checkout = () => {
                 setEmail("");
                 setEmailConfirmacion("");
             })
-            .catch (error => {console.log ("Error al confeccionar la Orden",error)
-            setError("error al armar la orden")})
+            .catch (error => {
+                console.log ("Error al confeccionar la Orden",error)
+            setError("error al armar la orden")
+        })
         
+    }
 
         return (
             <div>
@@ -64,7 +69,7 @@ const Checkout = () => {
                     {
                         cart.map(prod => (
                             <div key={prod.item.id}>
-                                <p>{prod.item.nombre} x {prod.item.cantidad}</p>
+                                <p>{prod.item.nombre} x {prod.quantity}</p>
                                 <p>{prod.item.precio}</p>
                                 <hr />
                             </div>
@@ -100,7 +105,7 @@ const Checkout = () => {
                 {error && <p style={{ color: "black" }}> {error} </p>}
 
                 <div className="mb-3">
-                    <button className="btn btn-primary" disabled={carrito.length === 0}>Finalizar Orden</button>
+                    <button className="btn btn-primary" disabled={cart.length === 0}>Finalizar Orden</button>
                     <button type="reset" className="btn btn-warning" style={{ margin: "20px", backgroundColor: "black", color: "white" }}>Borrar</button>
                 </div>
 
@@ -110,8 +115,6 @@ const Checkout = () => {
 
             </div>
         )
-
-    }
 
 
     //             Promise.all (
