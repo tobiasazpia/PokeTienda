@@ -1,0 +1,22 @@
+p {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.Button {
+    background-color: #287892;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.Button:hover {
+    background-color: #e39815;
+}

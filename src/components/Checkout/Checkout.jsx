@@ -88,26 +88,26 @@ const Checkout = () => {
                         )   
                     }               
 
-                <div className="mb-3">
+                <div className="mb">
                     <label htmlFor="nombre" className="form-label">Nombre</label>
                     <input type="text" className="form-control" id="nombre" onChange={(e) => setNombre(e.target.value)} />
                 </div>
 
-                <div className="mb-3">
+                <div className="mb">
                     <label htmlFor="apellido" className="form-label">Apellido</label>
                     <input type="text" className="form-control" id="apellido" onChange={(e) => setApellido(e.target.value)} />                 </div>
 
-                <div className="mb-3">
+                <div className="mb">
                     <label htmlFor="telefono" className="form-label">Telefono</label>
                     <input type="text" className="form-control" id="telefono" onChange={(e) => setTelefono(e.target.value)} />
                 </div>
 
-                <div className="mb-3">
+                <div className="mb">
                     <label htmlFor="email" className="form-label">E-mail</label>
                     <input type="email" className="form-control" id="email" onChange={(e) => setEmail(e.target.value)} />
                 </div>
 
-                <div className="mb-3">
+                <div className="mb">
                     <label htmlFor="emailcon" className="form-label">Email Confirmación</label>
                     <input type="email" className="form-control" id="emailcon" onChange={(e) => setEmailConfirmacion(e.target.value)} />
                 </div>

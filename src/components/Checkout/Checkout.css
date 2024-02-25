@@ -20,14 +20,14 @@ input[type="email"] {
     width: 100%;
 }
 
-.botones {
+.mb {
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 15px;
 }
 
-.miBtn.checkout {
+.mb.checkout {
     width: 50%;
 }
 
