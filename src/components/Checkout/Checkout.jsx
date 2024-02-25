@@ -1,7 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import { CartContext } from "../../context/cartContext";
 import { db } from "../../services/config";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, updateDoc, getDoc, doc } from "firebase/firestore";
+//import Swal from 'sweetalert2';
 import "../Checkout/Checkout.css"
 
 
@@ -19,7 +20,6 @@ const Checkout = () => {
 
     const manejadorSubmit = (event) => {
         event.preventDefault();
-        console.log('kkkk')
         if (!nombre || !apellido || !telefono || !email || !emailConfirmacion) {
             setError("Por favor completar todos los campos");
             return;
@@ -44,22 +44,32 @@ const Checkout = () => {
             email
         }
 
-        addDoc(collection(db, "orders"), orden)
-            .then(docRef => {
-                console.log ("adding doc",docRef.id)
-                setOrdenId(docRef.id)
-                clearCart();
-                setNombre("");
-                setApellido("");
-                setTelefono("");
-                setEmail("");
-                setEmailConfirmacion("");
+        Promise.all(
+            orden.items.map( async (productoOrden) => {
+                const productoRef = doc(db, "pokes", productoOrden.id);
+                const productoDoc = await getDoc(productoRef);
+                const stockActual = productoDoc.data().stock;
+
+                await updateDoc(productoRef, {stock: stockActual - productoOrden.cantidad});
             })
-            .catch (error => {
-                console.log ("Error al confeccionar la Orden",error)
-            setError("error al armar la orden")
+        )
+        .then(()=> {
+            addDoc(collection(db, "orders"), orden)
+                .then(docRef => {
+                    setOrdenId(docRef.id);
+                    clearCart();
+                    setNombre("");
+                    setApellido("");
+                    setTelefono("");
+                    setEmail("");
+                    setEmailConfirmacion("");
+                })
+                .catch(error => console.log("Error al crear la orden", error))
         })
-        
+        .catch(error => {
+            console.log("No pudimos actualizar el stock", error);
+            setError("Error al actualizar el stock");
+        })
     }
 
         return (
@@ -113,75 +123,10 @@ const Checkout = () => {
                 {
                     ordenId && <strong>¡Gracias por su compra! Tu número de orden es: {ordenId}</strong>
                 }
-
-                {
-                    
-                    true && <strong>trueeee</strong>
-                }
                 </form>
 
             </div>
         )
-
-
-    //             Promise.all (
-    //             orden.items.map( async (libroOrden)=>{
-    //             const libroRef = doc(db, "items", libroOrden.id)    
-    //             const libroDoc= await getDoc(libroRef)
-    //             const stockActual = libroDoc.data().stock;
-    //             await updateDoc (libroRef, {stock: stockActual - libroOrden.cantidad})
-    //         })
-    //         )
-    //         .then(()=> {
-
-
-    //                   Swal.fire({
-    //                     title: "Orden generada exitosamente!!",
-    //                     icon: "success",
-    //                     text: `Gracias por la compra!! Tu numero de orden es: ${docRef.id}`,
-    //                     showCancelButton: true,
-    //                     confirmButtonText: 'Confirmar',
-    //                     cancelButtonText: 'Cancelar',
-    //                   }).then((result) => {
-    //                     if (result.isConfirmed) {                      
-    //                       window.location.href = '/';                     }
-    //                   });
-
-    //             })                   
-    //             .catch (error => console.log ("Error al confeccionar la Orden",error) )
-    //             })
-
-    //             .catch (error => {
-    //                 console.log ("No se pudo actualizar el stock", error)
-    //             setError ("Error no se pudo actualizar el stock")
-
-    //         })
-
-    //     }       
-
-    //        return (
-    //         <div className="container">
-    //             <h2 className="mt-5">Checkout - Finalizamos la Compra </h2>
-
-    //             <form onSubmit={manejadorSubmit}>
-    //                 {
-    //                     cart.map(libro => (
-    //                         <div className="detalle" key={libro.item.id}>
-    //                             <p> Descripción:  {libro.item.nombre} x {libro.cantidad} </p>
-    //                             <p> Precio: $ {libro.item.precio} </p>
-
-    //                         </div>
-    //                     ))
-    //                 }
-
-    //                 <div className="mb-3">
-    //                     <button className="btn btn-primary" disabled={carrito.length === 0}>Finalizar Orden</button>
-    //                     <button type="reset" className="btn btn-warning" style={{margin: "20px", backgroundColor: "black", color: "white"}}>Borrar</button>
-    //                 </div>
-    //             </form>
-    //         </div>
-    //     );
-    // }
 }
 
 export default Checkout
